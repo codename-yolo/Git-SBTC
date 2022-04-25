@@ -11,9 +11,7 @@ function Modal({ children, isOpen, handleClose }) {
       document.body.removeEventListener('keydown', closeOnEscapeKey)
     }
   }, [handleClose])
-
   if (!isOpen) return null
-
   return (
     <ReactPortal wrapperId="react-portal-modal-container">
       <div className="modal">

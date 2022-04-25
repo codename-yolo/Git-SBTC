@@ -25,8 +25,9 @@ function ReactPortal({ children, wrapperId }) {
       }
     }
   }, [wrapperId])
-  if (wrapperElement === null) return null
-
+  if (wrapperElement === null) {
+    return null
+  }
   return createPortal(children, wrapperElement)
 }
 export default ReactPortal

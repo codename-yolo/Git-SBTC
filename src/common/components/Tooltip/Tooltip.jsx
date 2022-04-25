@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
-import './tooltip.scss'
+import React, { useState } from "react";
+import "./tooltip.scss";
 
 const Tooltip = (props) => {
-  let timeout
-  const [active, setActive] = useState(false)
+  let timeout;
+  const [active, setActive] = useState(false);
 
   const showTip = () => {
     timeout = setTimeout(() => {
-      setActive(true)
-    }, props.delay || 400)
-  }
+      setActive(true);
+    }, props.delay || 200);
+  };
 
   const hideTip = () => {
-    clearInterval(timeout)
-    setActive(false)
-  }
+    clearInterval(timeout);
+    setActive(false);
+  };
 
   return (
     <div
@@ -26,13 +26,13 @@ const Tooltip = (props) => {
       {/* Wrapping */}
       {props.children}
       {active && (
-        <div className={`Tooltip-Tip ${props.direction || 'top'}`}>
+        <div className={`Tooltip-Tip ${props.direction || "top"}`}>
           {/* Content */}
           {props.content}
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Tooltip
+export default Tooltip;
