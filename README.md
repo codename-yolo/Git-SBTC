@@ -3,6 +3,8 @@
 rafc
 create fast component
 
+If you want to format the project, please change the config path at setting.json in .vscodes
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
