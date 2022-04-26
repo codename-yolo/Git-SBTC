@@ -13,7 +13,7 @@ const Modal = ({ children, isOpen, handleClose }) => {
         eleRef.current.removeEventListener('click', handleClose)
       }
     }
-  }, [isOpen])
+  }, [])
   if (!isOpen) return null
 
   return ReactDom.createPortal(
