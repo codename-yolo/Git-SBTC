@@ -2,7 +2,7 @@ import { useState, useLayoutEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 function ReactPortal({ children, wrapperId, style }) {
-  const { left = '', top = '', bottom = '', right = '', transform = '' } = style
+  const { left = '', top = '', bottom = '', right = '' } = style
   const [wrapperElement, setWrapperElement] = useState(null)
   function createWrapperAndAppendToBody(wrapperId) {
     const wrapperElement = document.createElement('div')
@@ -13,7 +13,6 @@ function ReactPortal({ children, wrapperId, style }) {
       bottom: bottom.toString() + 'px',
       left: left.toString() + 'px',
       right: right.toString() + 'px',
-      transform: transform.toString(),
     })
     document.body.appendChild(wrapperElement)
     return wrapperElement

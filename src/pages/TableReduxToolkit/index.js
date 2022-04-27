@@ -1,24 +1,28 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import datasSlice from './redux/datasSlice'
 import { getDataSelector } from './redux/selectors'
-import { fixedNumber, formatDate } from '../../common/utils/formatValue'
+import RenderTable from './renderTable'
 import './index.css'
 const TableRedux = () => {
+  console.log('parent')
   const dispatch = useDispatch()
   const datas = useSelector(getDataSelector)
-  console.log(datas)
   useEffect(() => {
     const datas = async () => {
       const response = await axios.get(
-        'https://625ce68595cd5855d6178b7b.mockapi.io/dataset',
+        'https://625ce68595cd5855d6178b7b.mockapi.io/dataset'
       )
       if (response.status === 200) {
         dispatch(datasSlice.actions.getData(response.data))
       }
     }
     datas()
+  }, [])
+
+  const funcDispatch = useCallback((value) => {
+    dispatch(datasSlice.actions.editData(value))
   }, [])
 
   return (
@@ -45,33 +49,16 @@ const TableRedux = () => {
           </tr>
         </thead>
         <tbody>
-          {datas.map(
-            ({
-              id,
-              name,
-              shares,
-              percentage,
-              last_update,
-              price_range,
-              share_volume,
-              transaction_date,
-            }) => {
-              return (
-                <tr key={id}>
-                  <td>{name}</td>
-                  <td>{fixedNumber(shares)}</td>
-                  <td>{fixedNumber(percentage)}%</td>
-                  <td>{formatDate(last_update)}</td>
-                  <td>{share_volume}</td>
-                  <td>
-                    {fixedNumber(price_range.start)} - $
-                    {fixedNumber(price_range.end)}
-                  </td>
-                  <td>{formatDate(transaction_date)}</td>
-                </tr>
-              )
-            },
-          )}
+          {datas.map((item, index) => {
+            return (
+              <RenderTable
+                dispatch={funcDispatch}
+                key={item.id}
+                data={item}
+                index={index}
+              ></RenderTable>
+            )
+          })}
         </tbody>
       </table>
     </div>

@@ -7,9 +7,14 @@ import './modal2.scss'
 const Modal = ({ children, isOpen, handleClose, position }) => {
   useEffect(() => {
     const closeOnEscapeKey = (e) => (e.key === 'Escape' ? handleClose() : null)
-    document.body.addEventListener('keydown', closeOnEscapeKey)
+    document.addEventListener('keydown', closeOnEscapeKey)
+    // const handleClickClose = () => {
+    //   handleClose()
+    // }
+    // document.addEventListener('click', handleClickClose)
     return () => {
-      document.body.removeEventListener('keydown', closeOnEscapeKey)
+      document.removeEventListener('keydown', closeOnEscapeKey)
+      // document.removeEventListener('click', handleClickClose)
     }
   }, [])
   if (!isOpen) return null
